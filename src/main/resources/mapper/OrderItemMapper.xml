@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cardlan.sharding.jdbc.dao.OrderItemMapper">
+    <resultMap id="BaseResultMap" type="com.cardlan.sharding.jdbc.model.OrderItem">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="order_id" jdbcType="INTEGER" property="orderId"/>
+        <result column="item_name" jdbcType="VARCHAR" property="itemName"/>
+        <result column="item_code" jdbcType="VARCHAR" property="itemCode"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="create_user" jdbcType="VARCHAR" property="createUser"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="update_user" jdbcType="VARCHAR" property="updateUser"/>
+    </resultMap>
+    <select id="selectOrderItem" resultType="java.util.Map">
+      SELECT
+        oi.id,
+        oi.item_name AS itemName,
+        oi.item_code AS itemCode,
+        su.user_name AS userName
+      FROM order_item oi
+      LEFT JOIN user_order uo ON oi.id = uo.order_item_id
+      LEFT JOIN sys_user su ON uo.user_id = su.user_id
+      WHERE oi.create_time <![CDATA[>=]]> #{startTime} AND oi.create_time<![CDATA[<=]]>#{endTime}
+    </select>
+</mapper>

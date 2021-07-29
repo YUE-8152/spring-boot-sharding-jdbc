@@ -45,7 +45,7 @@ spring:
             complex:
               sharding-columns: create_time
               #复合分片算法类名称。该类需实现ComplexKeysShardingAlgorithm接口并提供无参数的构造器
-              algorithmClassName: com.cardlan.sharding.jdbc.common.sharding.TableComplexShardingAlgorithm
+              algorithm-class-name: com.cardlan.sharding.jdbc.common.sharding.TableComplexShardingAlgorithm
 #            standard:
 #              sharding-column: create_time
 #              precise-algorithm-class-name: com.cardlan.sharding.jdbc.common.config.ShardingTableAlgorithm
@@ -56,12 +56,13 @@ spring:
             complex:
               sharding-columns: create_time
               #复合分片算法类名称。该类需实现ComplexKeysShardingAlgorithm接口并提供无参数的构造器
-              algorithmClassName: com.cardlan.sharding.jdbc.common.sharding.TableComplexShardingAlgorithm
+              algorithm-class-name: com.cardlan.sharding.jdbc.common.sharding.TableComplexShardingAlgorithm
 #            standard:
 #              sharding-column: create_time
 #              precise-algorithm-class-name: com.cardlan.sharding.jdbc.common.config.ShardingTableAlgorithm
 #              range-algorithm-class-name: com.cardlan.sharding.jdbc.common.config.TableRangeShardingAlgorithm
-      binding-tables: sys_user,order_item
+      binding-tables:
+        - sys_user,order_item
       default-data-source-name: ds1
       defaultTableStrategy: #默认表分片策略，同分库策略
         none:
